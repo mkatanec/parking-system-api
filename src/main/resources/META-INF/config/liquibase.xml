@@ -1,0 +1,517 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="01-01" author="mkatanec">
+        <createSequence sequenceName="PARKING_SPACE_SEQ" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="01-02" author="mkatanec">
+        <createSequence sequenceName="ENTRANCE_SEQ" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="02-01" author="mkatanec">
+        <createTable tableName="ENTRANCE" remarks="Entrance">
+            <column name="ENTRANCE_ID" type="java.sql.Types.NUMERIC(20)" remarks="Entrance ID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ENTRANCE_ID"/>
+            </column>
+            <column name="ENTRANCE_NAME" type="java.sql.Types.VARCHAR(50)" remarks="Entrance name">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTRANCE_FLOOR" type="java.sql.Types.NUMERIC(20)" remarks="Entrance floor">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="02-02" author="mkatanec">
+        <createTable tableName="PARKING_SPACE" remarks="Entrance">
+            <column name="PARKING_SPACE_ID" type="java.sql.Types.NUMERIC(20)" remarks="Parking space ID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PARKING_SPACE_ID"/>
+            </column>
+            <column name="PARKING_SPACE_SECTION" type="java.sql.Types.VARCHAR(50)" remarks="Parking space section">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARKING_SPACE_NUMBER" type="java.sql.Types.NUMERIC(20)" remarks="Parking space number">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARKING_SPACE_FLOOR" type="java.sql.Types.NUMERIC(20)" remarks="Parking space floor">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARKING_SPACE_OCCUPIED" type="java.sql.Types.BOOLEAN" remarks="Parking space occupied">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="03-01" author="mkatanec">
+        <insert tableName="ENTRANCE">
+            <column name="ENTRANCE_ID" valueComputed="ENTRANCE_SEQ.NEXTVAL"/>
+            <column name="ENTRANCE_NAME" value="Zagreb"/>
+            <column name="ENTRANCE_FLOOR" valueNumeric="1"/>
+        </insert>
+        <insert tableName="ENTRANCE">
+            <column name="ENTRANCE_ID" valueComputed="ENTRANCE_SEQ.NEXTVAL"/>
+            <column name="ENTRANCE_NAME" value="Krapina"/>
+            <column name="ENTRANCE_FLOOR" valueNumeric="1"/>
+        </insert>
+        <insert tableName="ENTRANCE">
+            <column name="ENTRANCE_ID" valueComputed="ENTRANCE_SEQ.NEXTVAL"/>
+            <column name="ENTRANCE_NAME" value="Osijek"/>
+            <column name="ENTRANCE_FLOOR" valueNumeric="0"/>
+        </insert>
+        <insert tableName="ENTRANCE">
+            <column name="ENTRANCE_ID" valueComputed="ENTRANCE_SEQ.NEXTVAL"/>
+            <column name="ENTRANCE_NAME" value="Split"/>
+            <column name="ENTRANCE_FLOOR" valueNumeric="-1"/>
+        </insert>
+        <insert tableName="ENTRANCE">
+            <column name="ENTRANCE_ID" valueComputed="ENTRANCE_SEQ.NEXTVAL"/>
+            <column name="ENTRANCE_NAME" value="Rijeka"/>
+            <column name="ENTRANCE_FLOOR" valueNumeric="2"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="03-02" author="mkatanec">
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="03-03" author="mkatanec">
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="03-04" author="mkatanec">
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="03-05" author="mkatanec">
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="03-06" author="mkatanec">
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="A"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="B"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+        <insert tableName="PARKING_SPACE">
+            <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
+            <column name="PARKING_SPACE_SECTION" value="C"/>
+            <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
+        </insert>
+    </changeSet>
+
+
+
+</databaseChangeLog>

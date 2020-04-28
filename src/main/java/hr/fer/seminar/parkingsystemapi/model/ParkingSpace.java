@@ -4,29 +4,29 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="PARKING_SPACE")
+@Table(name = "PARKING_SPACE")
 public class ParkingSpace implements Serializable {
 
 	@Id
 	@GeneratedValue(generator = "parking-space-sequence-generator")
-	@SequenceGenerator(name="PARKING_SPACE_SEQ")
-	@Column(name="PARKING_SPACE_ID")
+	@SequenceGenerator(name = "parking-space-sequence-generator", sequenceName = "PARKING_SPACE_SEQ", allocationSize = 1)
+	@Column(name = "PARKING_SPACE_ID")
 	private Long id;
 
-	@Column(name="PARKING_SPACE_SECTION")
+	@Column(name = "PARKING_SPACE_SECTION")
 	private String section;
 
-	@Column(name="PARKING_SPACE_NUMBER")
+	@Column(name = "PARKING_SPACE_NUMBER")
 	private Integer spaceNumber;
 
-	@JoinColumn(name="PARKING_SPACE_FLOOR")
+	@JoinColumn(name = "PARKING_SPACE_FLOOR")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Floor floor;
 
-	@Column(name="PARKING_SPACE_OCCUPIED")
+	@Column(name = "PARKING_SPACE_OCCUPIED")
 	private Boolean occupied;
 
-	@Column(name="PARKING_SPACE_RESERVED")
+	@Column(name = "PARKING_SPACE_RESERVED")
 	private Boolean reserved;
 
 	public Long getId() {

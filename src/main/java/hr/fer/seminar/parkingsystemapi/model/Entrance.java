@@ -9,7 +9,7 @@ public class Entrance implements Serializable {
 
 	@Id
 	@GeneratedValue(generator = "entrance-sequence-generator")
-	@SequenceGenerator(name="ENTRANCE_SEQ")
+	@SequenceGenerator(name="entrance-sequence-generator", sequenceName = "ENTRANCE_SEQ", allocationSize = 1)
 	@Column(name="ENTRANCE_ID")
 	private Long id;
 

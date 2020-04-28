@@ -8,6 +8,7 @@ public interface EntranceService {
 	public List<Entrance> getAllEntrances();
 
 	public Entrance findEntranceById(final Long id);
+
 	public Entrance findEntranceByName(final String name);
 
 	public Entrance addEntrance(final Entrance entrance);

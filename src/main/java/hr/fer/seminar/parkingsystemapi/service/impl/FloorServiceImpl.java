@@ -43,9 +43,8 @@ public class FloorServiceImpl implements FloorService {
 	}
 
 	@Override
-	public void deleteFloor(final Integer id) {
-		final Floor floor = findFloorByLevel(id);
-		floorRepository.delete(floor);
+	public void deleteFloor(final Integer level) {
+		floorRepository.deleteFloorByLevel(level);
 	}
 
 	@Override

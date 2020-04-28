@@ -19,7 +19,7 @@ public class EntranceServiceImpl implements EntranceService {
 		this.entranceRepository = entranceRepository;
 	}
 
-	public List<Entrance> getAllEntrances(){
+	public List<Entrance> getAllEntrances() {
 		final List<Entrance> entrances = new ArrayList<>();
 
 		entranceRepository.findAll().forEach(entrances::add);
@@ -28,17 +28,17 @@ public class EntranceServiceImpl implements EntranceService {
 	}
 
 	@Override
-	public Entrance findEntranceById(final Long id){
+	public Entrance findEntranceById(final Long id) {
 		return entranceRepository.findById(id).orElse(null);
 	}
 
 	@Override
-	public Entrance findEntranceByName(final String name){
-		return  entranceRepository.findEntranceByEntranceName(name);
+	public Entrance findEntranceByName(final String name) {
+		return entranceRepository.findEntranceByEntranceName(name);
 	}
 
 	@Override
-	public Entrance addEntrance(final Entrance entrance){
+	public Entrance addEntrance(final Entrance entrance) {
 		return entranceRepository.save(entrance);
 	}
 

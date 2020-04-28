@@ -8,6 +8,7 @@ public interface ParkingSpaceService {
 	public List<ParkingSpace> getAllParkingSpaces();
 
 	public ParkingSpace findParkingSpaceById(final Long id);
+
 	public ParkingSpace findClosestParkingSpace(final Long entranceId);
 
 	public ParkingSpace addParkingSpace(final ParkingSpace parkingSpace);
@@ -15,6 +16,8 @@ public interface ParkingSpaceService {
 	public void deleteParkingSpace(final Long id);
 
 	public ParkingSpace updateParkingSpace(final ParkingSpace parkingSpace);
+
+	public ParkingSpace updateOccupied(final Long id, final Boolean occupied);
 
 	public Long getNumberOfUnoccupiedSpaces();
 }

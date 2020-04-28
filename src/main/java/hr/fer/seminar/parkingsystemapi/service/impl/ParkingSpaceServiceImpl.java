@@ -93,6 +93,19 @@ public class ParkingSpaceServiceImpl implements ParkingSpaceService {
 	}
 
 	@Override
+	public ParkingSpace updateOccupied(final Long id, final Boolean occupied) {
+		final ParkingSpace parkingSpace = findParkingSpaceById(id);
+
+		if (occupied && parkingSpace.getReserved()) {
+			parkingSpace.setReserved(false);
+		}
+
+		parkingSpace.setOccupied(occupied);
+
+		return updateParkingSpace(parkingSpace);
+	}
+
+	@Override
 	public Long getNumberOfUnoccupiedSpaces() {
 		return parkingSpaceRepository.countByOccupiedAndReserved(false, false);
 	}

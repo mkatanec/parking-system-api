@@ -16,4 +16,6 @@ public interface FloorRepository extends CrudRepository<Floor, Integer> {
 
 	@Query("FROM Floor FL ORDER BY ABS(FL.level - :level)")
 	List<Floor> getOrderedFloors(final @Param("level") Integer level);
+
+	void deleteFloorByLevel(final Integer level);
 }

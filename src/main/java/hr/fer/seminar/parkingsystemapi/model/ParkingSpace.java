@@ -19,8 +19,9 @@ public class ParkingSpace implements Serializable {
 	@Column(name="PARKING_SPACE_NUMBER")
 	private Integer spaceNumber;
 
-	@Column(name="PARKING_SPACE_FLOOR")
-	private Integer floor;
+	@JoinColumn(name="PARKING_SPACE_FLOOR")
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Floor floor;
 
 	@Column(name="PARKING_SPACE_OCCUPIED")
 	private Boolean occupied;
@@ -52,11 +53,11 @@ public class ParkingSpace implements Serializable {
 		this.spaceNumber = spaceNumber;
 	}
 
-	public Integer getFloor() {
+	public Floor getFloor() {
 		return floor;
 	}
 
-	public void setFloor(final Integer floor) {
+	public void setFloor(final Floor floor) {
 		this.floor = floor;
 	}
 

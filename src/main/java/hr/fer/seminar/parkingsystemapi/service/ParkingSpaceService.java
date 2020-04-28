@@ -16,5 +16,5 @@ public interface ParkingSpaceService {
 
 	public ParkingSpace updateParkingSpace(final ParkingSpace parkingSpace);
 
-	public Long numberOfUnoccupiedSpaces();
+	public Long getNumberOfUnoccupiedSpaces();
 }

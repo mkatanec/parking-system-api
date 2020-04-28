@@ -12,10 +12,13 @@ public class Entrance implements Serializable {
 	@SequenceGenerator(name="ENTRANCE_SEQ")
 	@Column(name="ENTRANCE_ID")
 	private Long id;
+
 	@Column(name="ENTRANCE_NAME")
 	private String entranceName;
-	@Column(name="ENTRANCE_FLOOR")
-	private Integer floor;
+
+	@JoinColumn(name="ENTRANCE_FLOOR")
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Floor floor;
 
 	public Long getId() {
 		return id;
@@ -33,11 +36,11 @@ public class Entrance implements Serializable {
 		this.entranceName = entranceName;
 	}
 
-	public Integer getFloor() {
+	public Floor getFloor() {
 		return floor;
 	}
 
-	public void setFloor(final Integer floor) {
+	public void setFloor(final Floor floor) {
 		this.floor = floor;
 	}
 }

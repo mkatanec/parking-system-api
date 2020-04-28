@@ -2,7 +2,6 @@ package hr.fer.seminar.parkingsystemapi.controller;
 
 import hr.fer.seminar.parkingsystemapi.model.ParkingSpace;
 import hr.fer.seminar.parkingsystemapi.service.ParkingSpaceService;
-import hr.fer.seminar.parkingsystemapi.service.impl.ParkingSpaceServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +28,6 @@ public class ParkingSpaceController {
 
 	@GetMapping(value="/parkingSpace/unoccupied")
 	public Long numberOfUnoccupiedSpaces(){
-		return parkingSpaceService.numberOfUnoccupiedSpaces();
+		return parkingSpaceService.getNumberOfUnoccupiedSpaces();
 	}
 }

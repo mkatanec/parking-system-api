@@ -9,4 +9,5 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface ParkingSpaceRepository extends CrudRepository<ParkingSpace, Long> {
+	Long countByOccupiedAndReserved(final Boolean occupied, final Boolean reserved);
 }

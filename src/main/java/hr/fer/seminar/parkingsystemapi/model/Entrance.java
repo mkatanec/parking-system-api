@@ -1,10 +1,11 @@
 package hr.fer.seminar.parkingsystemapi.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="ENTRANCE")
-public class Entrance {
+public class Entrance implements Serializable {
 
 	@Id
 	@GeneratedValue(generator = "entrance-sequence-generator")

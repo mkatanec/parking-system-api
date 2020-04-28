@@ -34,6 +34,11 @@ public class ParkingSpaceServiceImpl implements ParkingSpaceService {
 	}
 
 	@Override
+	public ParkingSpace findClosestParkingSpace(final Long entranceId) {
+		return null;
+	}
+
+	@Override
 	public ParkingSpace addParkingSpace(final ParkingSpace ParkingSpace){
 		return parkingSpaceRepository.save(ParkingSpace);
 	}
@@ -47,5 +52,10 @@ public class ParkingSpaceServiceImpl implements ParkingSpaceService {
 	@Override
 	public ParkingSpace updateParkingSpace(final ParkingSpace ParkingSpace) {
 		return parkingSpaceRepository.save(ParkingSpace);
+	}
+
+	@Override
+	public Long numberOfUnoccupiedSpaces() {
+		return parkingSpaceRepository.countByOccupiedAndReserved(false, false);
 	}
 }

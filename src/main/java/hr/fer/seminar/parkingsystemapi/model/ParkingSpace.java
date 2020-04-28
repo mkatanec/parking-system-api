@@ -1,10 +1,11 @@
 package hr.fer.seminar.parkingsystemapi.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="PARKING_SPACE")
-public class ParkingSpace {
+public class ParkingSpace implements Serializable {
 
 	@Id
 	@GeneratedValue(generator = "parking-space-sequence-generator")
@@ -23,6 +24,9 @@ public class ParkingSpace {
 
 	@Column(name="PARKING_SPACE_OCCUPIED")
 	private Boolean occupied;
+
+	@Column(name="PARKING_SPACE_RESERVED")
+	private Boolean reserved;
 
 	public Long getId() {
 		return id;
@@ -62,5 +66,13 @@ public class ParkingSpace {
 
 	public void setOccupied(final Boolean occupied) {
 		this.occupied = occupied;
+	}
+
+	public Boolean getReserved() {
+		return reserved;
+	}
+
+	public void setReserved(final Boolean reserved) {
+		this.reserved = reserved;
 	}
 }

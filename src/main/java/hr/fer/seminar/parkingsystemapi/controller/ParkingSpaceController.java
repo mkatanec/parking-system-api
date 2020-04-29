@@ -25,7 +25,7 @@ public class ParkingSpaceController {
 	}
 
 	@PutMapping(value = "/parkingSpace/occupied/{id}")
-	public ParkingSpace update(final @PathVariable(value = "id") Long id, final @RequestBody Boolean occupied) {
+	public ParkingSpace updateParkingSpaceOccupied(final @PathVariable(value = "id") Long id, final @RequestBody Boolean occupied) {
 		return parkingSpaceService.findClosestParkingSpace(id);
 	}
 

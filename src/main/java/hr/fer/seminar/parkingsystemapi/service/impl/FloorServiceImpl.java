@@ -12,43 +12,49 @@ import java.util.List;
 @Service
 public class FloorServiceImpl implements FloorService {
 
-	private final FloorRepository floorRepository;
+    private final FloorRepository floorRepository;
 
-	@Autowired
-	public FloorServiceImpl(final FloorRepository floorRepository) {
-		this.floorRepository = floorRepository;
-	}
+    @Autowired
+    public FloorServiceImpl(final FloorRepository floorRepository) {
+        this.floorRepository = floorRepository;
+    }
 
-	public List<Floor> getAllFloors(){
-		final List<Floor> floors = new ArrayList<>();
+    public List<Floor> getAllFloors() {
+        final List<Floor> floors = new ArrayList<>();
 
-		floorRepository.findAll().forEach(floors::add);
+        floorRepository.findAll().forEach(floors::add);
 
-		return floors;
-	}
+        return floors;
+    }
 
-	@Override
-	public List<Floor> getFloorsOrderedByLevel(final Integer level) {
-		return floorRepository.getOrderedFloors(level);
-	}
+    @Override
+    public Floor getFloor(Long id) {
+        return floorRepository.findById(id).orElse(null);
+    }
 
-	@Override
-	public Floor findFloorByLevel(final Integer level) {
-		return floorRepository.findFloorByLevel(level);
-	}
+    @Override
+    public List<Floor> getFloorsOrderedByLevel(final Integer level) {
+        return floorRepository.getOrderedFloors(level);
+    }
 
-	@Override
-	public Floor addFloor(final Floor floor){
-		return floorRepository.save(floor);
-	}
+    @Override
+    public Floor findFloorByLevel(final Integer level) {
+        return floorRepository.findFloorByLevel(level);
+    }
 
-	@Override
-	public void deleteFloor(final Integer level) {
-		floorRepository.deleteFloorByLevel(level);
-	}
+    @Override
+    public Floor addFloor(final Floor floor) {
+        return floorRepository.save(floor);
+    }
 
-	@Override
-	public Floor updateFloor(final Floor floor) {
-		return floorRepository.save(floor);
-	}
+    @Override
+    public void deleteFloor(final Long id) {
+        final Floor floor = getFloor(id);
+        floorRepository.delete(floor);
+    }
+
+    @Override
+    public Floor updateFloor(final Floor floor) {
+        return floorRepository.save(floor);
+    }
 }

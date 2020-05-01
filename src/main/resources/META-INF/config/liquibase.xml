@@ -15,6 +15,14 @@
         <createSequence sequenceName="ENTRANCE_SEQ" startValue="1" incrementBy="1"/>
     </changeSet>
 
+    <changeSet id="01-03" author="mkatanec">
+        <createSequence sequenceName="FLOOR_SEQ" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="01-04" author="mkatanec">
+        <createSequence sequenceName="USER_SEQ" startValue="1" incrementBy="1"/>
+    </changeSet>
+
     <changeSet id="02-01" author="mkatanec">
         <createTable tableName="ENTRANCE" remarks="Entrance">
             <column name="ENTRANCE_ID" type="java.sql.Types.NUMERIC(20)" remarks="Entrance ID">
@@ -54,8 +62,11 @@
 
     <changeSet id="02-03" author="mkatanec">
         <createTable tableName="FLOOR" remarks="Floor">
-            <column name="LEVEL" type="java.sql.Types.NUMERIC(20)" remarks="Floor level">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_FLOOR_LEVEL"/>
+            <column name="FLOOR_ID" type="java.sql.Types.NUMERIC(20)" remarks="Floor id">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_FLOOR_ID"/>
+            </column>
+            <column name="FLOOR_LEVEL" type="java.sql.Types.NUMERIC(20)" remarks="Floor level">
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
@@ -63,27 +74,41 @@
     <changeSet id="02-04" author="mkatanec">
         <addForeignKeyConstraint baseTableName="PARKING_SPACE"
                                  baseColumnNames="PARKING_SPACE_FLOOR"
-                                 constraintName="fk_floor_id"
+                                 constraintName="fk_parking_space_floor_id"
                                  referencedTableName="FLOOR"
                                  onDelete="CASCADE"
-                                 referencedColumnNames="LEVEL"/>
+                                 referencedColumnNames="FLOOR_ID"/>
+    </changeSet>
+
+    <changeSet id="02-05" author="mkatanec">
+        <addForeignKeyConstraint baseTableName="ENTRANCE"
+                                 baseColumnNames="ENTRANCE_FLOOR"
+                                 constraintName="fk_entrance_floor_id"
+                                 referencedTableName="FLOOR"
+                                 onDelete="CASCADE"
+                                 referencedColumnNames="FLOOR_ID"/>
     </changeSet>
 
     <changeSet id="03-01" author="mkatanec">
         <insert tableName="FLOOR">
-            <column name="LEVEL" valueNumeric="-1"/>
+            <column name="FLOOR_ID" valueComputed="FLOOR_SEQ.NEXTVAL"/>
+            <column name="FLOOR_LEVEL" valueNumeric="-1"/>
         </insert>
         <insert tableName="FLOOR">
-            <column name="LEVEL" valueNumeric="0"/>
+            <column name="FLOOR_ID" valueComputed="FLOOR_SEQ.NEXTVAL"/>
+            <column name="FLOOR_LEVEL" valueNumeric="0"/>
         </insert>
         <insert tableName="FLOOR">
-            <column name="LEVEL" valueNumeric="1"/>
+            <column name="FLOOR_ID" valueComputed="FLOOR_SEQ.NEXTVAL"/>
+            <column name="FLOOR_LEVEL" valueNumeric="1"/>
         </insert>
         <insert tableName="FLOOR">
-            <column name="LEVEL" valueNumeric="2"/>
+            <column name="FLOOR_ID" valueComputed="FLOOR_SEQ.NEXTVAL"/>
+            <column name="FLOOR_LEVEL" valueNumeric="2"/>
         </insert>
         <insert tableName="FLOOR">
-            <column name="LEVEL" valueNumeric="3"/>
+            <column name="FLOOR_ID" valueComputed="FLOOR_SEQ.NEXTVAL"/>
+            <column name="FLOOR_LEVEL" valueNumeric="3"/>
         </insert>
     </changeSet>
 
@@ -96,22 +121,22 @@
         <insert tableName="ENTRANCE">
             <column name="ENTRANCE_ID" valueComputed="ENTRANCE_SEQ.NEXTVAL"/>
             <column name="ENTRANCE_NAME" value="Krapina"/>
-            <column name="ENTRANCE_FLOOR" valueNumeric="1"/>
+            <column name="ENTRANCE_FLOOR" valueNumeric="2"/>
         </insert>
         <insert tableName="ENTRANCE">
             <column name="ENTRANCE_ID" valueComputed="ENTRANCE_SEQ.NEXTVAL"/>
             <column name="ENTRANCE_NAME" value="Osijek"/>
-            <column name="ENTRANCE_FLOOR" valueNumeric="0"/>
+            <column name="ENTRANCE_FLOOR" valueNumeric="3"/>
         </insert>
         <insert tableName="ENTRANCE">
             <column name="ENTRANCE_ID" valueComputed="ENTRANCE_SEQ.NEXTVAL"/>
             <column name="ENTRANCE_NAME" value="Split"/>
-            <column name="ENTRANCE_FLOOR" valueNumeric="-1"/>
+            <column name="ENTRANCE_FLOOR" valueNumeric="4"/>
         </insert>
         <insert tableName="ENTRANCE">
             <column name="ENTRANCE_ID" valueComputed="ENTRANCE_SEQ.NEXTVAL"/>
             <column name="ENTRANCE_NAME" value="Rijeka"/>
-            <column name="ENTRANCE_FLOOR" valueNumeric="2"/>
+            <column name="ENTRANCE_FLOOR" valueNumeric="5"/>
         </insert>
     </changeSet>
 
@@ -219,7 +244,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -227,7 +252,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -235,7 +260,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -243,7 +268,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -251,7 +276,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -259,7 +284,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -267,7 +292,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -275,7 +300,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -283,7 +308,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -291,7 +316,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -299,7 +324,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -307,7 +332,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="-1"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -318,7 +343,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -326,7 +351,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -334,7 +359,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -342,7 +367,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -350,7 +375,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -358,7 +383,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -366,7 +391,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -374,7 +399,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -382,7 +407,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -390,7 +415,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -398,7 +423,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -406,7 +431,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="0"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -417,7 +442,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="4"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -425,7 +450,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="4"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -433,7 +458,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="4"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -441,7 +466,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="4"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -449,7 +474,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="4"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -457,7 +482,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="4"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -465,7 +490,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="4"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -473,7 +498,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="4"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -481,7 +506,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="4"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -489,7 +514,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="4"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -497,7 +522,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="4"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -505,7 +530,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="2"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="4"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -516,7 +541,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="5"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -524,7 +549,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="5"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -532,7 +557,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="5"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -540,7 +565,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="A"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="5"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -548,7 +573,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="5"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -556,7 +581,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="5"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -564,7 +589,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="5"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -572,7 +597,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="B"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="5"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -580,7 +605,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="1"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="5"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -588,7 +613,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="2"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="5"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -596,7 +621,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="3"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="5"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>
@@ -604,7 +629,7 @@
             <column name="PARKING_SPACE_ID" valueComputed="PARKING_SPACE_SEQ.NEXTVAL"/>
             <column name="PARKING_SPACE_SECTION" value="C"/>
             <column name="PARKING_SPACE_NUMBER" valueNumeric="4"/>
-            <column name="PARKING_SPACE_FLOOR" valueNumeric="3"/>
+            <column name="PARKING_SPACE_FLOOR" valueNumeric="5"/>
             <column name="PARKING_SPACE_OCCUPIED" valueBoolean="false"/>
             <column name="PARKING_SPACE_RESERVED" valueBoolean="false"/>
         </insert>

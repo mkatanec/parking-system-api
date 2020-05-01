@@ -11,11 +11,9 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface FloorRepository extends CrudRepository<Floor, Integer> {
+public interface FloorRepository extends CrudRepository<Floor, Long> {
 	Floor findFloorByLevel(final Integer level);
 
 	@Query("FROM Floor FL ORDER BY ABS(FL.level - :level)")
 	List<Floor> getOrderedFloors(final @Param("level") Integer level);
-
-	void deleteFloorByLevel(final Integer level);
 }

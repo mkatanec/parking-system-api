@@ -1,9 +1,6 @@
 package hr.fer.seminar.parkingsystemapi.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -11,8 +8,21 @@ import java.io.Serializable;
 public class Floor implements Serializable {
 
 	@Id
-	@Column(name = "LEVEL")
+	@GeneratedValue(generator = "floor-sequence-generator")
+	@SequenceGenerator(name="floor-sequence-generator", sequenceName = "FLOOR_SEQ", allocationSize = 1)
+	@Column(name = "FLOOR_ID")
+	private Long id;
+
+	@Column(name = "FLOOR_LEVEL")
 	private Integer level;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Integer getLevel() {
 		return level;

@@ -19,6 +19,11 @@ public class FloorController {
 		return floorService.getAllFloors();
 	}
 
+	@GetMapping(value = "/floor/{id}")
+	public void getFloor(final @PathVariable("id") Long id) {
+		floorService.getFloor(id);
+	}
+
 	@PostMapping(value = "/floor")
 	public Floor createFloor(final @RequestBody Floor floor) {
 		return floorService.addFloor(floor);
@@ -30,7 +35,7 @@ public class FloorController {
 	}
 
 	@DeleteMapping(value = "/floor/{id}")
-	public void deleteFloor(final @PathVariable("id") Integer id) {
+	public void deleteFloor(final @PathVariable("id") Long id) {
 		floorService.deleteFloor(id);
 	}
 }

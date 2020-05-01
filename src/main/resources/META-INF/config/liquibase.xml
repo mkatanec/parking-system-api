@@ -89,6 +89,26 @@
                                  referencedColumnNames="FLOOR_ID"/>
     </changeSet>
 
+    <changeSet id="02-06" author="mkatanec">
+        <createTable tableName="USER" remarks="User">
+            <column name="USER_ID" type="java.sql.Types.NUMERIC(20)" remarks="User id">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_USER_ID"/>
+            </column>
+            <column name="USER_NAME" type="java.sql.Types.VARCHAR(50)" remarks="User name">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_SURNAME" type="java.sql.Types.VARCHAR(50)" remarks="User surname">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_EMAIL" type="java.sql.Types.VARCHAR(50)" remarks="User email">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_PASSWORD" type="java.sql.Types.VARCHAR(50)" remarks="User password">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
     <changeSet id="03-01" author="mkatanec">
         <insert tableName="FLOOR">
             <column name="FLOOR_ID" valueComputed="FLOOR_SEQ.NEXTVAL"/>

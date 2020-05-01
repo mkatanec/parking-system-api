@@ -655,6 +655,37 @@
         </insert>
     </changeSet>
 
+    <changeSet id="03-08" author="mkatanec">
+        <insert tableName="USER">
+            <column name="USER_ID" valueComputed="USER_SEQ.NEXTVAL"/>
+            <column name="USER_NAME" value="Matija"/>
+            <column name="USER_SURNAME" value="Matija"/>
+            <column name="USER_EMAIL" value="matija.katanec@fer.hr"/>
+            <column name="USER_PASSWORD" value="pass"/>
+        </insert>
+        <insert tableName="USER">
+            <column name="USER_ID" valueComputed="USER_SEQ.NEXTVAL"/>
+            <column name="USER_NAME" value="Toni"/>
+            <column name="USER_SURNAME" value="Bomboni"/>
+            <column name="USER_EMAIL" value="tonko@bombon.hr"/>
+            <column name="USER_PASSWORD" value="cokolada"/>
+        </insert>
+        <insert tableName="USER">
+            <column name="USER_ID" valueComputed="USER_SEQ.NEXTVAL"/>
+            <column name="USER_NAME" value="Ehtan"/>
+            <column name="USER_SURNAME" value="Klein"/>
+            <column name="USER_EMAIL" value="etha@teddyfresh.com"/>
+            <column name="USER_PASSWORD" value="vape"/>
+        </insert>
+        <insert tableName="USER">
+            <column name="USER_ID" valueComputed="USER_SEQ.NEXTVAL"/>
+            <column name="USER_NAME" value="Mislav"/>
+            <column name="USER_SURNAME" value="Tauba"/>
+            <column name="USER_EMAIL" value="internet@posta.hr"/>
+            <column name="USER_PASSWORD" value="polo"/>
+        </insert>
+    </changeSet>
+
 
 
 </databaseChangeLog>

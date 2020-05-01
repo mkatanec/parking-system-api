@@ -1,11 +1,9 @@
 package hr.fer.seminar.parkingsystemapi.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
 public class User implements Serializable {
     @Id
     @GeneratedValue(generator = "user-sequence-generator")
@@ -13,16 +11,16 @@ public class User implements Serializable {
     @Column(name = "USER_ID")
     private Long id;
 
-    @Column(name = "USER_ID")
+    @Column(name = "USER_NAME")
     private String name;
 
-    @Column(name = "USER_NAME")
+    @Column(name = "USER_SURNAME")
     private String surname;
 
-    @Column(name = "USER_SURNAME")
+    @Column(name = "USER_EMAIL")
     private String email;
 
-    @Column(name = "USER_EMAIL")
+    @Column(name = "USER_PASSWORD")
     private String password;
 
     public Long getId() {

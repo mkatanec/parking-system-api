@@ -29,6 +29,9 @@ public class ParkingSpace implements Serializable {
 	@Column(name = "PARKING_SPACE_RESERVED")
 	private Boolean reserved;
 
+	@Column(name = "PARKING_SPACE_SENSOR_ID")
+	private String sensorId;
+
 	public Long getId() {
 		return id;
 	}
@@ -75,5 +78,13 @@ public class ParkingSpace implements Serializable {
 
 	public void setReserved(final Boolean reserved) {
 		this.reserved = reserved;
+	}
+
+	public String getSensorId() {
+		return sensorId;
+	}
+
+	public void setSensorId(final String sensorId) {
+		this.sensorId = sensorId;
 	}
 }

@@ -17,7 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-boot-admin.version>2.2.1</spring-boot-admin.version>
-        <version.liquibase>3.8.0</version.liquibase>
+        <version.liquibase>4.8.0</version.liquibase>
     </properties>
 
     <dependencies>
